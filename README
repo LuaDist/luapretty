@@ -1,0 +1,63 @@
+* About LuaPretty
+  ---------------
+  LuaPretty is a syntax aware code highlighter and formatter for the Lua language.
+  It can be used separately as a standalone application or as a library from
+  within your own Lua project.
+  
+  Output of LuaPretty consists of reformatted input source code according to a
+  given template, which can be later highlighted using custom CSS to produce
+  a valid HTML document containing the highlighted and reformatted code.
+  
+  Formatter templates have the ability to make any change in the given source 
+  code. Reformatting the source code is only a small subset of changes that
+  can be made inside a formatter user template.
+  
+* Availability
+  ------------
+  LuaPretty is freely available for both academic and commercial purposes under
+  MIT license. See COPYRIGHT for details. 
+
+* Dependecies
+  -----------------------------------------
+  LuaPretty requires following modules to be installed:
+	lua >= 5.1	(not tested with 5.2)
+	alt_getopt >= 0.7
+	cosmo >= 10.04.06
+	leg == 0.1.3	(leg version 0.1.3 is provided by LuaDist and supports lpeg >= 0.10)
+	lpeg >= 0.10
+
+* Installation
+  ------------
+  Simplest way to install LuaPretty is to use the LuaDist (www.luadist.org) deployment 
+  tool by invoking:
+	
+	> ./luadist _luapretty install luapretty
+  
+  which will install LuaPretty and all it's dependecies into the _luapretty folder.
+  LuaPretty can be also installed using CMake (www.cmake.org). For manual installation 
+  copy the luapretty folder from src into your LUA_PATH folder. 
+  
+* Running
+  -------
+  When using LuaDist for installation, LuaPretty installs to a standalone directory 
+  and can be invoked from _luapretty/bin directory. LuaPretty provides two small 
+  applications:
+	src/lua-formatter.lua	- Lua source code reformater
+	src/lua-highlighter.lua 	- Lua source code syntax highlighter
+  
+  Both scripts can be simply executed using the lua runtime interpreter in the install 
+  directory, e.g.:
+  	$ cd _luapretty/bin/
+  	$ lua lua-formatter.lua
+	
+  LuaDist also installs binary versions of these sripts. 
+
+* Compatibility
+  -------------
+  LuaPretty was tested only on Linux platform, but should work on all main platforms.
+  
+* Authors
+  -------
+  LuaPretty is developed and maintained by:
+  	Viliam Kubis  (main developer)
+	Peter Kapec (project supervisor)

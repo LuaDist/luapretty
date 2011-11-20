@@ -1,0 +1,17 @@
+--- This dist file is part of LuaDist project
+
+name = "luapretty"
+version = "0.1"
+
+desc = "LuaPretty is a Lua source code formater and pretty printer"
+author = "Viliam Kubis, Peter Kapec"
+license = "MIT"
+url = "https://github.com/LuaDist/luapretty"
+maintainer = "Peter Kapec"
+
+depends = {
+	"lua ~> 5.1",
+	"alt_getopt >= 0.7",
+	"cosmo >= 10.04.06",
+	"leg = 0.1.3 ",	-- needs exactly version 0.1.3 that supports LPeg 0.10
+}
