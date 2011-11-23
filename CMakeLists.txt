@@ -14,4 +14,4 @@ install_lua_executable ( lua-highlighter src/lua-highlighter.lua )
 
 install ( DIRECTORY src/luapretty DESTINATION ${INSTALL_LMOD} )
 install_data ( README COPYRIGHT)
-install_doc ( doc/ )
+#install_doc ( doc/ )
