@@ -13,5 +13,5 @@ depends = {
 	"lua ~> 5.1",
 	"alt-getopt >= 0.7",
 	"cosmo >= 10.04.06",
-	"leg = 0.1.3 ",	-- needs exactly version 0.1.3 that supports LPeg 0.10
+	"leg >= 0.1.3 ",
 }
