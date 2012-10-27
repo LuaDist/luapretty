@@ -1,3 +1,4 @@
+#!/usr/bin/env lua
 -------------------------------------------------------------------------------
 -- LuaHighlighter
 -- @release 2011/04/04 11:49:00, Viliam Kubis
@@ -20,7 +21,7 @@ local function process_text(text,with_headers,css_embedded_code,css_link,html_ti
 	return highlighter.highlight_text(text,nil,with_headers,css_embedded_code,css_link,html_title);
 end
 
-local function usage_info(arg)	
+local function usage_info(arg)
 	print("\nUsage: "..arg[0]..
 [[ <input file> [<output file>] [-f]
 
@@ -46,7 +47,7 @@ Arguments:
 			file in the final markup (http addresses are accepted)
    -c, --css		use the given CSS style file. If the output mode is set
 			to full HTML markup (-a option), the CSS code will be
-			embedded directly in the generated markup. If the -x			
+			embedded directly in the generated markup. If the -x
 			option is also set, the whole css style file will be
 			copied to the location  given in the -x parameter. If
 			neither the -x or -a parameters are set, this option has
@@ -75,11 +76,11 @@ local html_title=optarg['t'];
 if(optind<#arg+1 and not optarg['h']) then
 	--spracovat subor
 	local file,ie=io.open(arg[optind]);
-	if(not file) then 
+	if(not file) then
 		print("ERROR: cannot open file "..arg[optind]..": "..ie);
 		return nil,ie
 	end
-	
+
 	--inicializacia argumentov
 	if(html_title==nil) then
 		local myfile=debug.getinfo(1, "S").source:sub(2)
@@ -87,7 +88,7 @@ if(optind<#arg+1 and not optarg['h']) then
 		myfile=myfile:sub(pos and pos or 1)
 		html_title=myfile:sub(1);
 	end
-	
+
 	--ziskat CSS kod, ak bol zadany
 	local embedded_css_code=nil
 
@@ -100,7 +101,7 @@ if(optind<#arg+1 and not optarg['h']) then
 		embedded_css_code=file:read("*all");
 		file:close();
 	end
-	
+
 	--css target file copy
 	if(css_file and css_target) then
 		if(css_file~=css_target) then
@@ -130,22 +131,22 @@ if(optind<#arg+1 and not optarg['h']) then
 			file2:close();
 		end
 	end
-	
+
 	--naformatovat text
 	local output=process_text(file:read("*all"),optarg['a'],embedded_css_code,css_target and css_target or css_file,html_title);
 	file:close()
-	
+
 	if(arg[optind+1]) then
 		--ok, otvorit pre zapis + premazat alebo vytvorit
 		file,ie=io.open(arg[optind+1]);
-		if(file and not optarg['f']) then	
+		if(file and not optarg['f']) then
 			print("WARNING: target file "..arg[optind+1].." already exists, use the -f switch to overwrite!");
 			file:close();
 			return nil,"Target file already exists!"
 		end
 		--zapisat
 		file,ie=io.open(arg[optind+1],"w+");
-		if(not file) then 
+		if(not file) then
 			print("ERROR: cannot create file: "..ie);
 			return nil,ie
 		end

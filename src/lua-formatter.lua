@@ -1,3 +1,4 @@
+#!/usr/bin/env lua
 -------------------------------------------------------------------------------
 -- LuaFormatter
 -- @release 2011/04/04 11:49:00, Viliam Kubis
@@ -22,7 +23,7 @@ end
 
 local subor=nil; --template file
 
-local function usage_info(args)	
+local function usage_info(args)
 	print("\nUsage: "..arg[0]..
 [[ <input file> [<output file>] [-t <template file>] [-f]
 
@@ -50,26 +51,26 @@ optarg,optind = alt_getopt.get_opts(arg,"t:fh",long_opts);
 if(optind<#arg+1 and not optarg['h']) then
 	--spracovat subor
 	local file,ie=io.open(arg[optind]);
-	if(not file) then 
+	if(not file) then
 		print("ERROR: cannot open file "..arg[optind]..": "..ie);
 		return nil,ie
 	end
-	
+
 	--naformatovat text
 	local output=process_text(file:read("*all"),optarg['t']);
 	file:close()
-	
+
 	if(arg[optind+1]) then
 		--ok, otvorit pre zapis + premazat alebo vytvorit
 		file,ie=io.open(arg[optind+1]);
-		if(file and not optarg['f']) then	
+		if(file and not optarg['f']) then
 			print("WARNING: target file "..arg[optind+1].." already exists, use the -f switch to overwrite!");
 			file:close();
 			return nil,"Target file already exists!"
 		end
 		--zapisat
 		file,ie=io.open(arg[optind+1],"w+");
-		if(not file) then 
+		if(not file) then
 			print("ERROR: cannot create file: "..ie);
 			return nil,ie
 		end
