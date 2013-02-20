@@ -1,0 +1,33 @@
+type = "x86"
+arch = "Windows"
+author = "Viliam Kubis, Peter Kapec"
+depends = {
+[[lua ~> 5.1]],
+[[alt-getopt >= 0.7]],
+[[cosmo >= 10.04.06]],
+[[leg = 0.1.3 ]],
+}
+
+desc = "LuaPretty is a Lua source code formater and pretty printer"
+version = "0.1"
+maintainer = "Peter Kapec"
+files = {
+Runtime = {
+[[bin\lua-formatter]],
+[[bin\lua-highlighter]],
+[[lib\lua\luapretty\ast_helper.lua]],
+[[lib\lua\luapretty\formatter.lua]],
+[[lib\lua\luapretty\highlighter.lua]],
+[[lib\lua\luapretty\templates\default.lua]],
+}
+,
+Data = {
+[[share\luapretty\README]],
+[[share\luapretty\COPYRIGHT]],
+}
+,
+}
+
+license = "MIT"
+name = "luapretty"
+url = "https://github.com/LuaDist/luapretty"
