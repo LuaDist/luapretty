@@ -233,6 +233,12 @@ local function sh(text)
 	return text;
 end
 
+local todoi = 0
+local questioni=0
+local bugi=0
+local fixmei=0
+local infoi = 0
+local howi=0
 -------------------------------------------
 -- Assembles the given parse tree into final HTML output chunk
 -- @param tbl full parse tree as returned by lpeg.match
@@ -252,6 +258,33 @@ function assemble_table(tbl)
 		end
 	end
 	if(table_found==false) then
+				if(get_css_class(tbl["key"]) == "upper_comment")then
+					if(string.match(sh(tbl['str']),"^--[%s]*TODO" ))then
+						todoi=todoi+1
+						return "<span class='"..get_css_class(tbl['key']).. "_todo"..(tbl['css_extra'] and tbl['css_extra'] or "").."'><a name='TODO" ..todoi .. "'></a>" ..sh(tbl['str']).."</span>", tbl['str'];
+					end
+					if(string.match(sh(tbl['str']),"^--[%s]*bug" ))then
+						bugi=bugi+1
+						return "<span class='"..get_css_class(tbl['key']).. "_bug"..(tbl['css_extra'] and tbl['css_extra'] or "").."'><a name='bug" ..bugi .. "'></a>" ..sh(tbl['str']).."</span>", tbl['str'];
+					end
+					if(string.match(sh(tbl['str']),"^--[%s]*?" ))then
+						questioni=questioni+1
+						return "<span class='"..get_css_class(tbl['key']).. "_question"..(tbl['css_extra'] and tbl['css_extra'] or "").."'><a name='question" ..questioni .. "'></a>" ..sh(tbl['str']).."</span>", tbl['str'];
+					end
+					if(string.match(sh(tbl['str']),"^--[%s]*fixme" ))then
+						fixmei=fixmei+1
+						return "<span class='"..get_css_class(tbl['key']).. "_fixme"..(tbl['css_extra'] and tbl['css_extra'] or "").."'><a name='fixme" ..fixmei .. "'></a>" ..sh(tbl['str']).."</span>", tbl['str'];
+					end
+					if(string.match(sh(tbl['str']),"^--[%s]*info" ))then
+						infoi=infoi+1
+						return "<span class='"..get_css_class(tbl['key']).. "_info"..(tbl['css_extra'] and tbl['css_extra'] or "").."'><a name='info" ..infoi .. "'></a>" ..sh(tbl['str']).."</span>", tbl['str'];
+					end
+					if(string.match(sh(tbl['str']),"^--[%s]*how" ))then
+						howi=howi+1
+						return "<span class='"..get_css_class(tbl['key']).. "_how"..(tbl['css_extra'] and tbl['css_extra'] or "").."'><a name='how" ..howi .. "'></a>" ..sh(tbl['str']).."</span>", tbl['str'];
+					end
+				end
+				-- print(,sh(tbl['str']))
 		return "<span class='"..get_css_class(tbl['key'])..(tbl['css_extra'] and tbl['css_extra'] or "").."'>"..sh(tbl['str']).."</span>", tbl['str'];
 	end
 	return "<span class='"..get_css_class(tbl['key'])..css_extra(tbl['key'],output_clean)..(tbl['css_extra'] and tbl['css_extra'] or "").."'>"..output.."</span>", output_clean;
@@ -269,7 +302,13 @@ end
 -- @returns highlighted text and parsed parse tree
 function highlight_text(text,pt,with_headers,embedded_css_code,css_link,html_title) -- je mozne predat hotovy parse tree (jedine, co musi obsahovat, je kluc kazdej node)
 	local rules=leg_parser.rules;
-	
+	todoi=0
+	bugi=0
+	questioni=0
+	fixmei=0
+	infoi=0
+	howi=0
+
 	local output="";
 	
 	if(pt==nil) then
