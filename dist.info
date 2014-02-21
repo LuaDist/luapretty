@@ -1,7 +1,7 @@
 --- This dist file is part of LuaDist project
 
 name = "luapretty"
-version = "0.1"
+version = "0.2"
 
 desc = "LuaPretty is a Lua source code formater and pretty printer"
 author = "Viliam Kubis, Peter Kapec"
